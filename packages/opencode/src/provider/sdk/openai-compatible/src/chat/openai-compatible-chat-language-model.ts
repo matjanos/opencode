@@ -45,7 +45,7 @@ const chatChunkSchema = z.object({
 })
 
 export class OpenAICompatibleChatLanguageModel implements LanguageModelV2 {
-  readonly specificationVersion = "v1"
+  readonly specificationVersion = "v2"
   readonly modelId: string
   readonly config: OpenAICompatibleProviderSettings & {
     url: (options: { path: string; modelId: string }) => string
