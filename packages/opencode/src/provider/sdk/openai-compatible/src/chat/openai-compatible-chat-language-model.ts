@@ -241,6 +241,8 @@ export class OpenAICompatibleChatLanguageModel implements LanguageModelV2 {
                   type: "reasoning-delta",
                   id: reasoningPartId,
                   textDelta: delta.reasoning_content,
+                  // @ts-ignore compatibility
+                  text: delta.reasoning_content,
                 } as any)
               }
               if (delta.content) {
