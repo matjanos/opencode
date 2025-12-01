@@ -1,8 +1,4 @@
-import {
-  type LanguageModelV2,
-  type LanguageModelV2StreamPart,
-  LanguageModelV2SpecificationVersion,
-} from "@ai-sdk/provider"
+import { type LanguageModelV2, type LanguageModelV2StreamPart } from "@ai-sdk/provider"
 import {
   createJsonResponseHandler,
   createEventSourceResponseHandler,
@@ -49,7 +45,7 @@ const chatChunkSchema = z.object({
 })
 
 export class OpenAICompatibleChatLanguageModel implements LanguageModelV2 {
-  readonly specificationVersion = LanguageModelV2SpecificationVersion
+  readonly specificationVersion = "v1"
   readonly modelId: string
   readonly config: OpenAICompatibleProviderSettings & {
     url: (options: { path: string; modelId: string }) => string
