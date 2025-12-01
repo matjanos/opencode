@@ -113,7 +113,7 @@ export class OpenAICompatibleChatLanguageModel implements LanguageModelV2 {
                     }),
                   )
                   .optional(),
-                reasoning_content: z.string().optional(),
+                reasoning_content: z.string().nullable().optional(),
               }),
               finish_reason: z.string().nullable(),
             }),
