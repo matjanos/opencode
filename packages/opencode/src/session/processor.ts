@@ -74,18 +74,10 @@ export namespace SessionProcessor {
                   if (value.id in reasoningMap) {
                     const part = reasoningMap[value.id]
                     // @ts-ignore
-                    const delta = value.textDelta ?? value.text ?? value.delta
-
-                    if (delta === undefined) {
-                      console.log("reasoning-delta missing content. Keys:", Object.keys(value))
-                      console.log("value:", JSON.stringify(value))
-                    }
-
-                    const safeDelta = delta ?? ""
-
-                    part.text += safeDelta
+                    const delta = value.textDelta ?? value.text ?? value.delta ?? ""
+                    part.text += delta
                     if (value.providerMetadata) part.metadata = value.providerMetadata
-                    if (part.text && safeDelta) await Session.updatePart({ part, delta: safeDelta })
+                    if (part.text && delta) await Session.updatePart({ part, delta })
                   }
                   break
 

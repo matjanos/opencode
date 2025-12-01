@@ -113,7 +113,7 @@ export class OpenAICompatibleChatLanguageModel implements LanguageModelV2 {
                     }),
                   )
                   .optional(),
-                reasoning_content: z.string().nullable().optional(),
+                reasoning_content: z.any().optional(),
               }),
               finish_reason: z.string().nullable(),
             }),
@@ -228,7 +228,7 @@ export class OpenAICompatibleChatLanguageModel implements LanguageModelV2 {
                 finishReason = choice.finish_reason
               }
               const delta = choice.delta
-              if (delta.reasoning_content) {
+              if (typeof delta.reasoning_content === "string") {
                 if (!reasoningPartId) {
                   reasoningPartId = "reasoning"
                   controller.enqueue({
@@ -245,7 +245,7 @@ export class OpenAICompatibleChatLanguageModel implements LanguageModelV2 {
                   text: delta.reasoning_content,
                 } as any)
               }
-              if (delta.content) {
+              if (typeof delta.content === "string") {
                 controller.enqueue({
                   type: "text-delta",
                   textDelta: delta.content,
