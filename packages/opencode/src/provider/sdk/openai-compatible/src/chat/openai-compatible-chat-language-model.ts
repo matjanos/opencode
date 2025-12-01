@@ -243,13 +243,19 @@ export class OpenAICompatibleChatLanguageModel implements LanguageModelV2 {
                   textDelta: delta.reasoning_content,
                   // @ts-ignore compatibility
                   text: delta.reasoning_content,
+                  // @ts-ignore compatibility
+                  delta: delta.reasoning_content,
                 } as any)
               }
               if (typeof delta.content === "string") {
                 controller.enqueue({
                   type: "text-delta",
                   textDelta: delta.content,
-                })
+                  // @ts-ignore compatibility
+                  text: delta.content,
+                  // @ts-ignore compatibility
+                  delta: delta.content,
+                } as any)
               }
               if (delta.tool_calls) {
                 for (const toolCall of delta.tool_calls) {

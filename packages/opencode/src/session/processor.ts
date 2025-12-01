@@ -297,12 +297,14 @@ export namespace SessionProcessor {
 
                 case "text-delta":
                   if (currentText) {
-                    currentText.text += value.text
+                    // @ts-ignore
+                    const delta = value.textDelta ?? value.text ?? value.delta ?? ""
+                    currentText.text += delta
                     if (value.providerMetadata) currentText.metadata = value.providerMetadata
-                    if (currentText.text)
+                    if (currentText.text && delta)
                       await Session.updatePart({
                         part: currentText,
-                        delta: value.text,
+                        delta: delta,
                       })
                   }
                   break
