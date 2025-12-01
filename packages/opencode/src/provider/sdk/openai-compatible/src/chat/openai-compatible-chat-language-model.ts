@@ -199,6 +199,7 @@ export class OpenAICompatibleChatLanguageModel implements LanguageModelV2 {
 
     let finishReason: any = "unknown"
     let usage: { promptTokens: number; completionTokens: number } | undefined = undefined
+    let reasoningPartId: string | undefined
 
     return {
       stream: response.pipeThrough(
@@ -228,10 +229,19 @@ export class OpenAICompatibleChatLanguageModel implements LanguageModelV2 {
               }
               const delta = choice.delta
               if (delta.reasoning_content) {
+                if (!reasoningPartId) {
+                  reasoningPartId = "reasoning"
+                  controller.enqueue({
+                    type: "reasoning-start",
+                    id: reasoningPartId,
+                  } as any)
+                }
+
                 controller.enqueue({
                   type: "reasoning-delta",
+                  id: reasoningPartId,
                   textDelta: delta.reasoning_content,
-                })
+                } as any)
               }
               if (delta.content) {
                 controller.enqueue({
