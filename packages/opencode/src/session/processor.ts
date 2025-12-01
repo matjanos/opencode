@@ -72,6 +72,7 @@ export namespace SessionProcessor {
 
                 case "reasoning-delta":
                   if (value.id in reasoningMap) {
+                    console.log("reasoning-delta value:", JSON.stringify(value))
                     const part = reasoningMap[value.id]
                     // @ts-ignore
                     const delta = value.textDelta ?? value.text
