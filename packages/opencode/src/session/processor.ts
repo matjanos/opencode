@@ -73,9 +73,11 @@ export namespace SessionProcessor {
                 case "reasoning-delta":
                   if (value.id in reasoningMap) {
                     const part = reasoningMap[value.id]
-                    part.text += value.text
+                    // @ts-ignore
+                    const delta = value.textDelta ?? value.text
+                    part.text += delta
                     if (value.providerMetadata) part.metadata = value.providerMetadata
-                    if (part.text) await Session.updatePart({ part, delta: value.text })
+                    if (part.text) await Session.updatePart({ part, delta })
                   }
                   break
 
