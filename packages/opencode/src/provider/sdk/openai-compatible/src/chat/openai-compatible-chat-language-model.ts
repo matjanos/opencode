@@ -16,7 +16,7 @@ const chatChunkSchema = z.object({
       delta: z.object({
         role: z.string().optional(),
         content: z.string().nullable().optional(),
-        reasoning_content: z.string().optional(),
+        reasoning_content: z.string().nullable().optional(),
         tool_calls: z
           .array(
             z.object({
