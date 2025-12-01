@@ -1,5 +1,5 @@
 import type { LanguageModelV2 } from "@ai-sdk/provider"
-import { OpenAICompatibleChatLanguageModel } from "@ai-sdk/openai-compatible"
+import { OpenAICompatibleChatLanguageModel } from "./chat/openai-compatible-chat-language-model"
 import { type FetchFunction, withoutTrailingSlash, withUserAgentSuffix } from "@ai-sdk/provider-utils"
 import { OpenAIResponsesLanguageModel } from "./responses/openai-responses-language-model"
 

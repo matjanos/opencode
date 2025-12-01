@@ -36,7 +36,7 @@ export namespace Provider {
     "@ai-sdk/google-vertex": createVertex,
     "@ai-sdk/google-vertex/anthropic": createVertexAnthropic,
     "@ai-sdk/openai": createOpenAI,
-    "@ai-sdk/openai-compatible": createOpenAICompatible,
+    "@ai-sdk/openai-compatible": createGitHubCopilotOpenAICompatible,
     "@openrouter/ai-sdk-provider": createOpenRouter,
     // @ts-ignore (TODO: kill this code so we dont have to maintain it)
     "@ai-sdk/github-copilot": createGitHubCopilotOpenAICompatible,
@@ -288,6 +288,15 @@ export namespace Provider {
             "X-Title": "opencode",
           },
         },
+      }
+    },
+    deepseek: async () => {
+      return {
+        autoload: false,
+        async getModel(sdk: any, modelID: string) {
+          return sdk.chat(modelID)
+        },
+        options: {},
       }
     },
   }
